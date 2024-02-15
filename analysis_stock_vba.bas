@@ -85,7 +85,7 @@ ws.Cells(result, 11).Value = percentyr
 ws.Cells(result, 12).Value = tsvol
 
 result = result + 1
-vol = 0
+tsvol = 0
 openyr = 0
 
 Else
