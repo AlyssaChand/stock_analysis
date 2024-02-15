@@ -4,6 +4,7 @@ Sub stock_data()
 'column header
 Dim ws As Worksheet
 For Each ws In ThisWorkbook.Worksheets
+ws.UsedRange.Columns.AutoFit
 
 ws.Cells(1, 9).Value = "Ticker"
 ws.Cells(1, 10).Value = "Yearly Change"
@@ -54,7 +55,7 @@ result = 2
 Set ws = ThisWorkbook.Sheets("2020")
 
 'find last row
-lastRow = ws.Cells(alpha.Rows.Count, 1).End(xlUp).Row
+lastRow = ws.Cells(ws.Rows.Count, 1).End(xlUp).Row
 
 'calculation
 For i = 2 To lastRow
@@ -64,12 +65,12 @@ openyr = ws.Cells(i, 3).Value
 End If
 
 
-If alpha.Cells(i - 1, 1).Value = ws.Cells(i, 1).Value And ws.Cells(i + 1, 1).Value <> ws.Cells(i, 1).Value Then
+If ws.Cells(i - 1, 1).Value = ws.Cells(i, 1).Value And ws.Cells(i + 1, 1).Value <> ws.Cells(i, 1).Value Then
 
 closeyr = ws.Cells(i, 6).Value
 changeyr = closeyr - openyr
 ticker = ws.Cells(i, 1).Value
-tsvol = tsvol + alpha.Cells(i, 7).Value
+tsvol = tsvol + ws.Cells(i, 7).Value
 
 If openyr <> 0 Then
 percentyr = (changeyr / openyr) * 100
@@ -88,7 +89,7 @@ vol = 0
 openyr = 0
 
 Else
-tsvol = tsvol + alpha.Cells(i, 7).Value
+tsvol = tsvol + ws.Cells(i, 7).Value
 
 End If
 Next i
